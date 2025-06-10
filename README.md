@@ -1,6 +1,4 @@
-好的！以下是包含 安裝 Python、建立虛擬環境、安裝依賴、執行 API 伺服器 的完整 GitHub README.md 格式，你可以直接複製貼上到 GitHub 上使用。
 
-⸻
 
 
 # 🐶 PyTorch Dog Classifier API
