@@ -1,53 +1,70 @@
-當然可以！以下是一份適合你這個 PyTorch 圖片分類 API 專案的 README.md 草稿：
+好的！以下是包含 安裝 Python、建立虛擬環境、安裝依賴、執行 API 伺服器 的完整 GitHub README.md 格式，你可以直接複製貼上到 GitHub 上使用。
 
 ⸻
 
 
 # 🐶 PyTorch Dog Classifier API
 
-This project is a simple image classification API using a pre-trained ResNet-18 model from PyTorch to identify the object in an uploaded image. You can deploy it on an EC2 instance and test it by uploading a dog photo — it will tell you the breed (e.g., golden retriever).
+A simple Flask API using a pre-trained ResNet-18 model (via PyTorch) to identify dog breeds or other objects in uploaded images.
+
+> Upload a photo and get back what the model thinks it is (e.g., golden retriever, tabby cat, sports car...).
 
 ---
 
-## 🔧 Installation
+## 🔧 Installation Guide
 
-### 1. Clone the repository
+This project is intended to be run on a Linux-based environment such as Ubuntu or an EC2 instance.
+
+### 1. Install Python 3 and pip
+
+Ubuntu (20.04+):
 
 ```bash
+sudo apt update
+sudo apt install -y python3 python3-pip python3-venv
+
+2. Clone the repository
+
 git clone https://github.com/HowardLee12/pytorch-dog-identify.git
 cd pytorch-dog-identify
 
-2. Create a Python virtual environment (recommended)
+3. Create and activate a virtual environment
 
 python3 -m venv myenv
 source myenv/bin/activate
 
-3. Install required packages
+4. Install Python dependencies
 
 pip install -r requirements.txt
+
+If you don’t have a requirements.txt, you can install manually:
+
+pip install flask torch torchvision pillow requests
 
 
 ⸻
 
-🚀 How to Run the API
-
-Start the Flask server:
+🚀 Run the API Server
 
 python3 app.py
 
-By default, the server runs on http://0.0.0.0:5000.
+The Flask server will run on:
+
+http://0.0.0.0:5000
+
+Make sure your security group or firewall allows TCP port 5000.
 
 ⸻
 
 🧪 How to Use
 
-Send a POST request with an image to /predict.
+Send a POST request to /predict with an image file.
 
-Example using curl:
+Example (using curl):
 
 curl -X POST -F "image=@dog.jpg" http://<your-ec2-public-ip>:5000/predict
 
-Response:
+Example Response:
 
 {
   "prediction": "golden retriever"
@@ -56,29 +73,40 @@ Response:
 
 ⸻
 
-📦 Files
-	•	app.py: Main Flask app that loads the pre-trained ResNet18 model and handles prediction.
-	•	requirements.txt: Python dependencies.
-	•	dog.jpg: Sample image (optional, or you can use your own test images).
-
-⸻
-
 🛠 Tech Stack
 	•	Python 3
 	•	Flask
-	•	PyTorch
+	•	PyTorch (ResNet18 pretrained)
 	•	TorchVision
-	•	PIL (Pillow)
+	•	Pillow (PIL)
 
 ⸻
 
-📌 Notes
-	•	Make sure your EC2 security group allows TCP port 5000.
-	•	If you run the app in a cloud environment, consider using tmux, screen, or nohup to keep it running in the background.
+📦 Project Structure
+
+File	Description
+app.py	Main Flask application
+requirements.txt	Python dependency list (optional)
+dog.jpg	Sample image for testing (optional)
+
 
 ⸻
 
-🐾 Example Output
+🧰 Tips
+	•	Run the Flask server in the background using tmux, screen, or:
+
+nohup python3 app.py > flask.log 2>&1 &
+
+	•	To stop the app:
+
+ps aux | grep app.py
+kill <PID>
+
+
+
+⸻
+
+🐾 Sample Output
 
 $ curl -X POST -F "image=@dog.jpg" http://<your-ip>:5000/predict
 {"prediction": "golden retriever"}
@@ -92,4 +120,4 @@ MIT License
 
 ---
 
-是否要我幫你產出一份 `requirements.txt` 搭配這個 `README.md`？或者你希望我幫你補上部署到 Docker 的教學？
+這份 `README.md` 適合公開專案，能讓其他人快速上手部署。如果你有後續想用 Docker、接 HTTPS、或上 ECS，我可以幫你補上對應章節。需要嗎？
